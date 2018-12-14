@@ -130,41 +130,76 @@
 }
 
 // --
-// move to kernl(ui) when ready
+// for kb article status tracking
+td.edit-status {
+  position: relative;
+  padding-left: 0.75rem;
+  border-left: 7px solid $gray-100;
+  color: rgba(0, 0, 0, 0.7);
 
-.section.\--banner {
-  &.\+nav { align-items: initial; }
-}
-
-.fs-carousel-enabled .fs-carousel-controls {
-  height: 0;
-  top: auto;
-  bottom: 35px;
-}
-
-.fs-carousel-enabled .fs-carousel-control {
-  // pods
-  height: 30px;
-  top: 40px;
-  margin-top: auto;
-  transform: none;
-
-  &::before {
-    right: -2px;
-    left: -2px;
+  &.\--assign {
+    border-left-color: $gray-800;
+    background-color: rgba($blue, 0.1);
+    font-style: italic;
   }
 
-  &.fs-carousel-control_previous {
-    left: 10px;
+  &.\--incomplete {
+    border-left-color: $red;
+    background-color: rgba($red, 0.05);
   }
 
-  &.fs-carousel-control_next {
-    right: 10px;
+  &.\--complete {
+    border-left-color: $yellow;
+    background-color: rgba($yellow, 0.05);
   }
-  // end pods
+
+  &.\--finalized {
+    border-left-color: $green;
+    background-color: rgba($green, 0.05);
+  }
 }
 
-// --
-// end move to kernl(ui)
+.--all {
+  th {
+    font-size: $fs-xs;
+    color: $gray;
+    vertical-align: middle;
+  }
+
+  td { position: relative; }
+
+  .__excerpt {
+    font-size: $fs-xs;
+    color: $gray;
+    line-height: 1.2;
+  }
+
+  .post-edit-link {
+    position: absolute;
+    right: 1rem;
+    top: 0.85rem;
+    height: auto;
+    background: transparent;
+    padding: 0;
+    color: rgba($type-link, 0.7);
+    transition: color 0.2s ease;
+
+    i,
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    &:hover { color: rgba($type-link, 1); }
+  }
+
+  .\--related {
+    i,
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
 
 /* stylelint-enable */
