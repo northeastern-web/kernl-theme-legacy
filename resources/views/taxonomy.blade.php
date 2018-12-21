@@ -5,7 +5,7 @@
     // grab all the current details
     $current_taxonomy = get_query_var('taxonomy');
     $current_term = get_term_by('slug', get_query_var('term'), $current_taxonomy);
-    $current_term_children = get_term_children($current_term->term_id, $current_taxonomy);
+    $current_term_children = get_terms(['taxonomy' => $current_taxonomy, 'parent' => $current_term->term_id, 'orderby' => 'order', 'order' => 'ASC', 'fields' => 'ids']);
     $type = get_query_var('type');
 
     // set stage for query
@@ -20,7 +20,7 @@
       $count = 20;
       $taxonomy = 'group';
       $term_children = get_terms('group', ['parent' => 0, 'fields' => 'ids', 'exclude' => [18]]);
-      $segment = ['taxonomy' => $current_taxonomy, 'field' => 'term_id', 'terms' => $current_term];
+      $segment = ['taxonomy' => $current_taxonomy, 'field' => 'term_id', 'terms' => $current_term->term_id];
       $orderby = 'title';
 
     } else {
@@ -36,9 +36,9 @@
     <div class="row">
       <div class="col w--2/3@t w--3/4@w --content">
         @if($collection || $audience)
-          <div class="bg--gray-warm-light pa--1 cf items--center">
-            <span class="tt--u fw--700">Filtered by:</span> {{ ($collection ? $collection : $audience) }}
-            <a href="{{ esc_url(remove_query_arg(($collection ? 'collection' : 'audience'))) }}" class="btn bg--red --sm f--r">Clear</a>
+          <div class="bg--gray-warm-light pa--1 d--flex items--center justify--between mb--1">
+            <div><span class="tt--u fw--700 mr--0h">Filtered by:</span> {{ ($collection ? $collection : $audience) }}</div>
+            <a href="{{ esc_url(remove_query_arg(($collection ? 'collection' : 'audience'))) }}" class="btn bg--red --sm mb--0">Clear</a>
           </div>
         @endif
 
@@ -97,6 +97,12 @@
       </div>
 
       <div class="col w--1/3@t w--1/4@w pl--3@w mb--2 --aside">
+        @if(get_field('txt_adspace', get_queried_object()))
+          <aside>
+            {!! get_field('txt_adspace', get_queried_object()) !!}
+          </aside>
+        @endif
+
         @if ($term_children)
           <aside class="card pos--sticky tt--caps bs--none">
             <div class="__header pa--1 fs--xs bg--gray-900 tc--gray-100">
@@ -109,12 +115,6 @@
                 @endforeach
               </div>
             </div>
-          </aside>
-        @endif
-
-        @if(get_field('txt_adspace', get_queried_object()))
-          <aside>
-            {!! get_field('txt_adspace', get_queried_object()) !!}
           </aside>
         @endif
       </div>
