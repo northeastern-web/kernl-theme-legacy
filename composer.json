@@ -38,6 +38,6 @@
     "roots/sage-installer": "~1.6"
   },
   "scripts": {
-    "test": ["phpcs"],
+    "test": ["phpcs"]
   }
 }
