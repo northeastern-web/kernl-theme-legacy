@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Kernl;
 
 class Site
 {
@@ -68,31 +68,5 @@ class Site
         $current_item = current(wp_filter_object_list($menu_items, ['object_id' => get_queried_object_id()]));
 
         return ($current_item && $current_item->title == $item->title ? true : false);
-    }
-
-    public static function articleStatus()
-    {
-        if (get_field('select_status')) :
-          ob_start();
-        echo the_field('select_status');
-        $status = ob_get_contents();
-        ob_end_clean(); else :
-          $status = '!! Assign Status !!';
-        endif;
-
-        $status_class = '';
-
-        if (
-            $status == "Incomplete (needs editing)") : $status_class = "--incomplete"; 
-        elseif (
-            $status == "Complete (needs review)") : $status_class = "--complete"; 
-        elseif (
-            $status == "Finalized (no further review needed)") : $status_class = "--finalized"; 
-        elseif (
-            $status == "Verify (keep or delete)") : $status_class = "--verify"; 
-        else : $status_class = "--assign";
-        endif;
-
-        return [$status, $status_class];
     }
 }
