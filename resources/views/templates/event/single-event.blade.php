@@ -28,9 +28,9 @@ if (tribe_event_is_multiday()) {
       <div class="card h--auto mb--1">
         <div class="__body pb--1">
           <div class="__title mb--1">{!! $event_date !!}</div>
+          <div><a class="btn --sm" href="?ical"><i data-feather="calendar"></i> iCal</a></div>
           <p>{!! '<b>' . tribe_get_venue() . '</b>' . (tribe_address_exists() ? '<br>'. tribe_get_full_address() : '') !!}</p>
           {!! tribe_get_event_categories(null, ['label_before' => '<div class="tt--u">', 'wrap_before' => '<ul class="fs--sm">']) !!}
-          <div class="mt--2">@include('templates.single._sharing')</div>
         </div>
       </div>
     </div>
