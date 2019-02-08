@@ -18,7 +18,7 @@
 
     @include('chrome._masthead')
 
-    <main id="main_content" role="document">
+    <main id="main_content" role="main">
       @yield('content')
 
       {{ (is_singular() ? edit_post_link('<i data-feather="edit"></i></span><span class="edit-text">Edit ' . (is_single() ? 'Post' : 'Page') . '', '', '', 0, 'post-edit-link btn --sm bg--blue') : '') }}
