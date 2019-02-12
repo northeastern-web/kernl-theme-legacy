@@ -14,17 +14,6 @@ class Site
         new PostTypes;
         new Taxonomies;
 
-        // Add trending articles options page
-        add_action('admin_menu', function () {
-            acf_add_options_page([
-                'page_title'  => 'Trending Articles',
-                'menu_title'  => 'Trending',
-                'capability'  => 'edit_posts',
-                'position'    => '2.3',
-                'icon_url'    => 'dashicons-chart-line'
-            ]);
-        }, 12);
-
         // Adjust taxonomy archive query
         add_action('pre_get_posts', function ($query) {
             global $wp_the_query;

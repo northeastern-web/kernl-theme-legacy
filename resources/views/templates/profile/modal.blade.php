@@ -1,4 +1,4 @@
-<div class="modal" id="modal_profile-{{ get_the_ID() }}" tabindex="-1" role="dialog" aria-labelledby="modal_base_label" aria-hidden="true">
+<div class="modal" id="modal_profile-{{ get_the_ID() }}" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="__screen" data-dismiss="modal"></div>
 
   <div class="__content bg--white pa--0 section --nogutters">

@@ -18,7 +18,7 @@
 
     @include('chrome._masthead')
 
-    <main id="main_content" role="document">
+    <main id="main_content" role="main">
       @yield('content')
 
       {{ (is_singular() ? edit_post_link('<i data-feather="edit"></i></span><span class="edit-text">Edit ' . (is_single() ? 'Post' : 'Page') . '', '', '', 0, 'post-edit-link btn --sm bg--blue') : '') }}
@@ -31,7 +31,9 @@
     @include('templates.search._modal')
 
     @php(wp_footer())
-
+    @if(get_field('bool_chrome_header', 'option') || get_field('bool_chrome_footer', 'option'))
+      <script src="{{ \Kernl\Utility::getBrandChrome('js') }}"></script>
+    @endif
     {!! \Kernl\Utility::getGoogleAnalytics(\WP_ENV, get_field('txt_analytics','option')) !!}
   </body>
 </html>
