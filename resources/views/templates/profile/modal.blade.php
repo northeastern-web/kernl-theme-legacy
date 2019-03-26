@@ -11,7 +11,7 @@
         @endif
 
         <div class="__body">
-          <h2>{{ the_field('txt_fname') }} {{ the_field('txt_lname') }}</h2>
+          <h2 class="mb--0">{{ the_field('txt_fname') }} {{ the_field('txt_lname') }}</h2>
 
           @if(get_field('txt_title'))
             <h3 class="fs--d1 fs--italic">{{ the_field('txt_title') }}</h3>
