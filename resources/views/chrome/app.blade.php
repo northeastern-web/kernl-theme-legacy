@@ -1,9 +1,10 @@
 <!doctype html>
 <html @php(language_attributes()) @php(body_class()) id="html">
-
   @include('chrome._head')
 
   <body {!! (get_field('bool_global_contain', 'option') ? 'class="contain"' : '') !!}>
+    {!! \Kernl\Utility::getTagManager('noscript', \WP_ENV) !!}
+
     <a class="skip alert" href="#main_content">Skip to main content</a>
 
     <!--[if IE]>
@@ -11,8 +12,6 @@
         <b><i>Note</i></b>: You are using an <strong>outdated</strong> browser. Please <a class="tc--red" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
       </div>
     <![endif]-->
-
-    {!! \Kernl\Utility::getTagManager(\WP_ENV) !!}
 
     @php(do_action('get_header'))
 
