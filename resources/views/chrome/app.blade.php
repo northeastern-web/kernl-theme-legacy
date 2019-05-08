@@ -3,7 +3,7 @@
   @include('chrome._head')
 
   <body {!! (get_field('bool_global_contain', 'option') ? 'class="contain"' : '') !!}>
-    {!! \Kernl\Utility::getTagManager('noscript', \WP_ENV) !!}
+    {!! (\WP_ENV == 'production' ? \Kernl\NU\Support::gtmNoScript() : '') !!}
 
     <a class="skip alert" href="#main_content">Skip to main content</a>
 
@@ -30,9 +30,11 @@
     @include('templates.search._modal')
 
     @php(wp_footer())
+
     @if(get_field('bool_chrome_header', 'option') || get_field('bool_chrome_footer', 'option'))
-      <script src="{{ \Kernl\Utility::getBrandChrome('js') }}"></script>
+      <script src="{{ \Kernl\NU\Support::chromeScript() }}"></script>
     @endif
-    {!! \Kernl\Utility::getGoogleAnalytics(\WP_ENV, get_field('txt_analytics','option')) !!}
+
+    {!! (\WP_ENV == 'production' ? \Kernl\NU\Support::googleAnalytics(get_field('txt_analytics','option')) : '') !!}
   </body>
 </html>

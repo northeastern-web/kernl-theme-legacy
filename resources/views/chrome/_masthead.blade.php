@@ -1,6 +1,6 @@
 @if (get_field('bool_chrome_header', 'option'))
   <div id="nu__globalheader">
-    {!! \Kernl\Utility::getBrandChrome('header') !!}
+    {!! (\WP_ENV == 'production' ? \Kernl\Utility::chromeHeader() : '') !!}
   </div>
 @endif
 
