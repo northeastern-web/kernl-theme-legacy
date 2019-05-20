@@ -7,5 +7,5 @@
   @endif
   @php(wp_head())
   <link href="//fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900" rel="stylesheet">
-  {!! \Kernl\Lib\NU::gtmScript() !!}
+  {!! (\WP_ENV == 'production' ? \Kernl\Lib\NU::gtmScript() : '<!-- GTM Script tag -->') !!}
 </head>

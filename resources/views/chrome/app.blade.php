@@ -1,12 +1,9 @@
 <!doctype html>
 <html @php(language_attributes()) @php(body_class()) id="html">
   @include('chrome._head')
-
   <body {!! (get_field('bool_global_contain', 'option') ? 'class="contain"' : '') !!}>
-    {!! \Kernl\Lib\NU::gtmNoScript() !!}
-
+    {!! (\WP_ENV == 'production' ? \Kernl\Lib\NU::gtmNoScript() : '<!-- GTM No Script tag -->') !!}
     <a class="skip alert" href="#main_content">Skip to main content</a>
-
     <!--[if IE]>
       <div class="bg--beige fs--sm pa--1 pa--2@d">
         <b><i>Note</i></b>: You are using an <strong>outdated</strong> browser. Please <a class="tc--red" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
@@ -19,7 +16,6 @@
 
     <main id="main_content" role="main">
       @yield('content')
-
       {{ (is_singular() ? edit_post_link('<i data-feather="edit"></i></span><span class="edit-text">Edit ' . (is_single() ? 'Post' : 'Page') . '', '', '', 0, 'post-edit-link btn --sm bg--blue') : '') }}
     </main>
 
