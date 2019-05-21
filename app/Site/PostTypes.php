@@ -9,7 +9,6 @@ class PostTypes
         // $this->register();
     }
 
-
     protected function register()
     {
         add_action('init', function () {
