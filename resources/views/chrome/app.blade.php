@@ -1,7 +1,7 @@
 <!doctype html>
 <html @php(language_attributes()) @php(body_class()) id="html">
   @include('chrome._head')
-  <body {!! (get_field('bool_global_contain', 'option') ? 'class="contain"' : '') !!}>
+  <body {!! (\Kernl\Lib\Utility::getGlobalContain() ? 'class="'. \Kernl\Lib\Utility::getGlobalContain() .'"' : '') !!}>
     {!! (\WP_ENV == 'production' ? \Kernl\Lib\NU::gtmNoScript() : '<!-- GTM No Script tag -->') !!}
     <a class="skip alert" href="#main_content">Skip to main content</a>
     <!--[if IE]>
