@@ -106,7 +106,7 @@ class App extends Controller
         if (is_single()) {
             $output = '';
 
-            if (! get_field('bool_hide_author')) {
+            if (get_field('bool_show_author')) {
                 $output .= '
                 <div class="tt--caps fw--700 fs--sm pt--0h">by '
                     . (get_field('bool_override_author') ? get_field('txt_author') : get_the_author()) .
