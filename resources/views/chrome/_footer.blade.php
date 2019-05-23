@@ -1,9 +1,9 @@
 @if(get_field('bool_chrome_footer', 'option'))
   <footer role="contentinfo">
     <div id="nu__global-footer">
-      {!! \Kernl\Utility::getBrandChrome('footer') !!}
+      {!! \Kernl\Lib\NU::chromeFooter() !!}
     </div>
   </footer>
 @else
-  {!! \Kernl\Utility::getFooter() !!}
+  {!! \Kernl\Lib\NU::chromeFooter(true) !!}
 @endif
