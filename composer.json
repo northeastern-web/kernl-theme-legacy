@@ -20,7 +20,7 @@
     },
     {
       "type": "vcs",
-      "url": "https://nupods@bitbucket.org/nupods/kernl-lib-wp.git"
+      "url": "https://nupods@bitbucket.org/nupods/kernl-theme-lib.git"
     }
   ],
   "autoload": {
@@ -37,7 +37,7 @@
     "soberwp/controller": "~2.1.0",
     "stoutlogic/acf-builder": "~1.5",
     "nupods/kernl-lib-nu": "~1.0",
-    "nupods/kernl-lib-wp": "~1.0"
+    "nupods/kernl-theme-lib": "~1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.8.0",
