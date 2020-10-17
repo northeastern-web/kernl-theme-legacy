@@ -1,9 +1,3 @@
-@if (get_field('bool_chrome_header', 'option'))
-  <div id="nu__globalheader">
-    {!! \Kernl\Lib\NU::chromeHeader() !!}
-  </div>
-@endif
-
 <header class="{{ \Kernl\Lib\Masthead::getClass() }} {{ (has_nav_menu('utility_navigation') ? '+utility' : '') }}" role="banner">
   <a class="__logo" href="{{ home_url('/') }}">
     <img class="__logo__image" src="{{ \Kernl\Lib\Masthead::getLogo() }}" alt="<?= get_bloginfo('name', 'display'); ?> logo">
