@@ -28,19 +28,19 @@ class Card extends Component
     {
         $this->image = $image ? $image : $this->getImage();
 
-        // $this->alt = $alt ? $alt : $this->getalt;
-        // $this->cssClass = $cssClass ? $cssClass : $this->getcssClass;
+        $this->alt = $alt ? $alt : $this->getAlt();
+        $this->cssClass = $cssClass ? $cssClass : $this->getCssClass();
         $this->excerpt = $excerpt ? $excerpt : $this->getExcerpt();
-        // $this->footer = $footer ? $footer : $this->getfooter;
+        $this->footer = $footer ? $footer : $this->getFooter();
         $this->header = $header ? $header : $this->getHeader();
-        // $this->image = $image ? $image : $this->getimage;
-        // $this->media = $media ? $media : $this->getmedia;
-        // $this->link = $link ? $link : $this->getlink;
-        // $this->title = $title ? $title : $this->gettitle;
-        // $this->subtitle = $subtitle ? $subtitle : $this->getsubtitle;
+        $this->image = $image ? $image : $this->getImage();
+        $this->media = $media ? $media : $this->getMedia();
+        $this->link = $link ? $link : $this->getLink();
+        $this->title = $title ? $title : $this->getTitle();
+        $this->subtitle = $subtitle ? $subtitle : $this->getSubtitle();
     }
 
-    public function alt()
+    public function getAlt()
     {
         if (get_sub_field('image')) {
             return get_sub_field('image')['alt'];
@@ -51,7 +51,7 @@ class Card extends Component
         }
     }
 
-    public function cssClass()
+    public function getCssClass()
     {
         if (get_post_type() == 'profile') {
             return '-profile group';
@@ -77,7 +77,7 @@ class Card extends Component
         }
     }
 
-    public function footer()
+    public function getFooter()
     {
         if (get_sub_field('footer')) {
             return get_sub_field('footer');
@@ -120,7 +120,7 @@ class Card extends Component
         }
     }
 
-    public function media()
+    public function getMedia()
     {
         if (get_sub_field('media')) {
             return get_sub_field('media');
@@ -133,7 +133,7 @@ class Card extends Component
         return 'ar-16x9';
     }
 
-    public function link()
+    public function getLink()
     {
         if (get_sub_field('url')) {
             return get_sub_field('url')['url'];
@@ -142,7 +142,7 @@ class Card extends Component
         return get_permalink();
     }
 
-    public function title()
+    public function getTitle()
     {
         if (get_sub_field('title')) {
             return get_sub_field('title');
@@ -151,7 +151,7 @@ class Card extends Component
         return get_the_title();
     }
 
-    public function subtitle()
+    public function getSubtitle()
     {
         if (get_sub_field('subtitle')) {
             return get_sub_field('subtitle');
