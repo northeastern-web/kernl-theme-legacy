@@ -1,5 +1,5 @@
 @extends('chrome.app')
 
-@section('content')
-  @include('templates._section')
-@endsection
+{{-- @section('content')
+  @include('structure.section')
+@endsection --}}

@@ -1,17 +1,15 @@
 {
-  "name": "nupods/kernl-wp",
+  "name": "roots/sage",
   "type": "wordpress-theme",
   "license": "MIT",
-  "description": "Northeastern WP starter theme",
-  "homepage": "https://assets.provost.northeastern.edu/kernl/wp/",
-  "authors": [
-    {
-      "name": "NU PODS",
-      "email": "provost-digital@northeastern.edu"
-    }
+  "description": "WordPress starter theme with a modern development workflow",
+  "homepage": "https://roots.io/sage/",
+  "keywords": [
+    "wordpress"
   ],
   "support": {
-    "documentation": "https://assets.provost.northeastern.edu/kernl/wp/"
+    "issues": "https://github.com/roots/sage/issues",
+    "forum": "https://discourse.roots.io/"
   },
   "repositories": [
     {
@@ -20,30 +18,42 @@
     },
     {
       "type": "vcs",
-      "url": "https://nupods@bitbucket.org/nupods/kernl-lib-wp.git"
+      "url": "https://nupods@bitbucket.org/nupods/kernl-theme-lib.git"
     }
   ],
   "autoload": {
     "psr-4": {
-      "App\\": "app/",
-      "Kernl\\": "app/Site"
+      "App\\": "app/"
     }
   },
   "require": {
-    "php": ">=7.1",
-    "composer/installers": "~1.0",
-    "illuminate/support": "5.6.*",
-    "roots/sage-lib": "~9.0.7",
-    "soberwp/controller": "~2.1.0",
-    "stoutlogic/acf-builder": "~1.5",
-    "nupods/kernl-lib-nu": "~1.0",
-    "nupods/kernl-lib-wp": "~1.0"
+    "php": "^7.2.5",
+    "log1x/navi": "^1.0",
+    "log1x/sage-directives": "^1.1",
+    "log1x/sage-svg": "^1.0",
+    "northeastern-web/support": "dev-master",
+    "nupods/kernl-lib-nu": "dev-release/1.1.0",
+    "nupods/kernl-theme-lib": "dev-release/1.1.0",
+    "roots/acorn": "^1.1",
+    "stoutlogic/acf-builder": "^1.10"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^2.8.0",
-    "roots/sage-installer": "~1.6"
+    "filp/whoops": "^2.7",
+    "squizlabs/php_codesniffer": "^3.5"
   },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "scripts": {
-    "test": ["phpcs"]
+    "lint": [
+      "phpcs --ignore=index.php,vendor,resources,storage,dist --extensions=php --standard=PSR12 ."
+    ],
+    "post-autoload-dump": [
+      "Roots\\Acorn\\ComposerScripts::postAutoloadDump"
+    ]
   }
 }

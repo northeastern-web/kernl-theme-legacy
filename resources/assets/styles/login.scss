@@ -1,34 +1,4 @@
-// kernl
-// login
-//
-// custom login screen
-
-// get the font [normally called in kernl(wp) head]
-@import url("https://fonts.googleapis.com/css?family=Lato:400,400i");
-
-// import kernl(ui) baseline styles and functions
-@import "~kernl-ui/src/styles/01.global/variables/colors";
-@import "~kernl-ui/src/styles/01.global/variables/layout";
-@import "~kernl-ui/src/styles/01.global/variables/misc";
-@import "~kernl-ui/src/styles/01.global/variables/sizing";
-@import "~kernl-ui/src/styles/01.global/variables/typography";
-
-// Global Methods
-@import "~kernl-ui/src/styles/01.global/methods/colors";
-@import "~kernl-ui/src/styles/01.global/methods/layout";
-@import "~kernl-ui/src/styles/01.global/methods/media-queries";
-@import "~kernl-ui/src/styles/01.global/methods/misc";
-@import "~kernl-ui/src/styles/01.global/methods/sizing";
-@import "~kernl-ui/src/styles/01.global/methods/typography";
-
-// Baseline
-@import "~kernl-ui/src/styles/02.baseline/document";
-@import "~kernl-ui/src/styles/02.baseline/typography";
-@import "~kernl-ui/src/styles/02.baseline/forms";
-
-// Structure
-@import "~kernl-ui/src/styles/03.structure/form";
-@import "~kernl-ui/src/styles/05.utilities/typography/style-decoration";
+@import "~kernl-ui/src/styles/main";
 
 // You can't keep DRY *and* satisfy stylelint 'no-descending-specificity'
 // so we disable stylelint for these styles
@@ -38,7 +8,9 @@ body.login {
   background-color: #a19994;
   font-family: $type-sans;
 
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+  }
 
   p {
     &#nav {
@@ -118,7 +90,9 @@ body.login {
         &.forgetmenot {
           padding-top: 10px;
 
-          label { font-size: $fs-sm !important; }
+          label {
+            font-size: $fs-sm !important;
+          }
 
           input#rememberme {
             width: 16px;
@@ -152,14 +126,18 @@ body.login {
         font-size: $fs-root;
         padding: 0.5rem 0.75rem;
 
-        &#user_login { border: 1px solid rgba(0, 0, 0, 0.225); }
+        &#user_login {
+          border: 1px solid rgba(0, 0, 0, 0.225);
+        }
 
         &#user_pass {
           border: 1px solid rgba(0, 0, 0, 0.225);
           margin-bottom: 1.5rem;
         }
 
-        &:focus { box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); }
+        &:focus {
+          box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        }
       }
 
       #shibboleth-wrap {
@@ -200,7 +178,9 @@ body.login {
           font-size: $fs-xs;
         }
       }
-      .shibboleth-clear { order: 5; }
+      .shibboleth-clear {
+        order: 5;
+      }
     }
 
     @include mqbp-up(t) {
@@ -228,7 +208,9 @@ body.login {
         }
       }
 
-      &:focus { border-color: $red; }
+      &:focus {
+        border-color: $red;
+      }
     }
   }
 

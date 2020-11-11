@@ -12,3 +12,8 @@ vendor
 resources/assets/config-local.json
 
 !vendor/pods/*
+/node_modules
+/vendor
+/dist
+npm-debug.log
+yarn-error.log
