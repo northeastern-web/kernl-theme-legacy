@@ -1,6 +1,6 @@
-<header class="{{ \Kernl\Lib\Utility::getMastheadClass() }}">
+<header class="{{ \Kernl\Lib\Masthead::getClass() }}">
   <a class="masthead_logo" href="{{ home_url('/') }}">
-    <img class="masthead_image" alt="Logo" src="{{ \Kernl\Lib\Utility::getLogo() }}">
+    <img class="masthead_image" alt="Logo" src="{{ \Kernl\Lib\Masthead::getLogo() }}">
   </a>
 
   <div class="masthead_toggle">
@@ -11,7 +11,7 @@
   <nav class="masthead_nav nav" data-navigation-handle=".nav_handle" data-navigation-content=".masthead_toggle">
     <div class="w-100 d-flex justify-between hidden-up@d">
       <a class="masthead_logo pl-1 mb-0h" href="#">
-        <img class="masthead_image" alt="Logo" src="{{ get_field('logo', 'option') }}">
+        <img class="masthead_image" alt="Logo" src="{{ \Kernl\Lib\Masthead::getLogo() }}">
       </a>
       <button type="button" class="nav_handle hidden-up@d mr-1">
         <span class="sr-only">Close Menu</span>

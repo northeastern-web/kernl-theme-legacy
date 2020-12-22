@@ -1,8 +1,9 @@
-@if (get_field('bool_chrome_header', 'option'))
+{{-- Not found in \Kernl\Lib --}}
+{{-- @if (get_field('bool_chrome_header', 'option'))
   <div id="nu__globalheader">
     {!! \Kernl\Lib\NU::chromeHeader() !!}
   </div>
-@endif
+@endif --}}
 
 <header class="{{ \Kernl\Lib\Masthead::getClass() }} {{ (has_nav_menu('utility_navigation') ? '+utility' : '') }}" role="banner">
   <a class="__logo" href="{{ home_url('/') }}">

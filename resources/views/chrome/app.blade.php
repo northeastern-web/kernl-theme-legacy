@@ -1,6 +1,7 @@
-<div x-data="NUGlobalElements.header({
+{{-- Now loaded through \Kernl\Lib\Config --}}
+{{-- <div x-data="NUGlobalElements.header({
   skipToMainSelector: '#app' // or the ID of the element to skip to
-})" x-init="init()" style="height: 48px; background-color: black"></div>
+})" x-init="init()" style="height: 48px; background-color: black"></div> --}}
 
 @include('chrome.local-header')
 
@@ -8,4 +9,6 @@
   @yield('content')
 </main>
 
-<div x-data="NUGlobalElements.footer()" x-init="init()"></div>
+{{-- Now loaded through \Kernl\Lib\Config --}}
+{{-- Now referencing Kernl\Lib\Config to pull in footer --}}
+{{-- <div x-data="NUGlobalElements.footer()" x-init="init()"></div> --}}
