@@ -3,10 +3,7 @@
 namespace App\Providers;
 
 use Roots\Acorn\ServiceProvider;
-use Kernl\Lib\Acf;
-use Kernl\Lib\Hooks;
-use Kernl\Lib\PostTypes;
-use Kernl\Lib\Shortcodes;
+use Kernl\Lib\Config as KernlConfig;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -27,9 +24,6 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        new Acf();
-        new Hooks();
-        new PostTypes();
-        new Shortcodes();
+        new KernlConfig;
     }
 }
