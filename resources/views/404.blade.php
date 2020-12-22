@@ -1,7 +1,7 @@
 @extends('chrome.app')
 
 @section('content')
-@include('components.header')
+@include('templates._banner')
 <article>
   <div class="section">
     @if (! have_posts())
