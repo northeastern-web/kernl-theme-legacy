@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('chrome.app')
 
 @section('content')
-@include('partials.page-header')
+@include('components.header')
 
 @if (! have_posts())
 <x-alert type="warning">
@@ -12,7 +12,7 @@
 @endif
 
 @while(have_posts()) @php(the_post())
-@include('partials.content-search')
+@include('templates.search.list-item')
 @endwhile
 
 {!! get_the_posts_navigation() !!}
