@@ -1,0 +1,16 @@
+kernl-theme:
+  build:
+    dockerfile: ./deployment/Dockerfile.deployment
+    args:
+      SITE: nudevkernl
+			ENV: development
+  volumes:
+    - ./.ssh:/root/.ssh
+
+environment:
+  build:
+    dockerfile: ./deployment/Dockerfile.environment
+  encrypted_env_file:
+    - codeship.env.encrypted
+  volumes:
+    - ./.ssh:/root/.ssh

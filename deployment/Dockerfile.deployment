@@ -1,0 +1,43 @@
+FROM php:7.4
+
+ARG ENV=development
+ARG SITE
+
+RUN mkdir /root/.ssh
+COPY ./.ssh/. /root/.ssh/
+
+RUN apt update
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt install -y zlib1g-dev git zip nodejs ssh
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/ \
+    && ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
+
+COPY . /app/src
+WORKDIR /app
+
+RUN mkdir wp-content \
+    && mkdir wp-content/themes \
+    && mkdir wp-content/themes/kernl-theme-legacy-9 \
+    && mv src/* wp-content/themes/kernl-theme-legacy-9
+
+WORKDIR /app/wp-content/themes/kernl-theme-legacy-9
+
+RUN composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
+RUN npm install && npm run build:production
+
+RUN echo "node_modules" > .gitignore \
+    && echo "*.exe" >> .gitignore
+
+WORKDIR /app
+
+RUN rm -rf .git \
+    && git init \
+    && git config --global user.name "CodeShip deployment" \
+    && git config --global user.email "websolutions@northeastern.edu" \
+    && git remote add origin git@git.wpengine.com:$ENV/$SITE.git
+
+
+RUN git add wp-content \
+    && git commit -m 'Codeship deploy' \
+    && git push origin HEAD:refs/heads/$ENV --force
