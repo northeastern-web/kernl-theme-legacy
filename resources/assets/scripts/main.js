@@ -5,7 +5,7 @@
 
 // import external dependencies
 import 'jquery';
-import 'kernl-ui';
+import '@northeastern-web/kernl-ui';
 
 // import local dependencies
 import Router from './util/Router';
