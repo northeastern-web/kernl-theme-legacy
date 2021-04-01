@@ -1,4 +1,4 @@
-kernl-theme:
+kernl-theme-legacy-9:
   build:
     dockerfile: ./deployment/Dockerfile.deployment
     args:
