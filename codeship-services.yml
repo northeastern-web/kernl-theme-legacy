@@ -3,7 +3,7 @@ kernl-theme-legacy-9:
     dockerfile: ./deployment/Dockerfile.deployment
     args:
       SITE: nudevkernl
-			ENV: development
+      ENV: development
   volumes:
     - ./.ssh:/root/.ssh
 
