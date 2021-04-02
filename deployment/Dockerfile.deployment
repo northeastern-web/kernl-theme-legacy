@@ -7,7 +7,7 @@ RUN mkdir /root/.ssh
 COPY ./.ssh/. /root/.ssh/
 
 RUN apt update
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt install -y zlib1g-dev git zip nodejs ssh
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/ \
@@ -24,7 +24,7 @@ RUN mkdir wp-content \
 WORKDIR /app/wp-content/themes/kernl-theme-legacy-9
 
 RUN composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts
-RUN npm install && npm run build:production
+RUN npm install --legacy-peer-deps && npm run build:production
 
 RUN echo "node_modules" > .gitignore \
     && echo "*.exe" >> .gitignore
