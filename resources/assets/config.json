@@ -6,9 +6,6 @@
     ],
     "customizer": [
       "./scripts/customizer.js"
-    ],
-    "login": [
-      "./styles/login.scss"
     ]
   },
   "publicPath": "/app/themes/kernl-wp",
