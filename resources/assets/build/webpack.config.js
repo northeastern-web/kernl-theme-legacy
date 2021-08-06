@@ -181,6 +181,7 @@ let webpackConfig = {
     new StyleLintPlugin({
       failOnError: !config.enabled.watcher,
       syntax: 'scss',
+      // configFile: config.paths.root + '/.stylelintrc.json'
     }),
     new FriendlyErrorsWebpackPlugin(),
   ],

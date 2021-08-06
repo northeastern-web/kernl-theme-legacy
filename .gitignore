@@ -5,10 +5,10 @@ dist
 node_modules
 npm-debug.log
 yarn-error.log
-yarn.lock
 package-lock.json
 composer.lock
 vendor
+storage
 resources/assets/config-local.json
 
 !vendor/pods/*
@@ -17,3 +17,5 @@ codeship_deploy_key
 codeship_deploy_key.pub
 codeship.env
 .ssh
+
+.DS_Store
