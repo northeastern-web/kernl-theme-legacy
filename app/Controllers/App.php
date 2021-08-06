@@ -64,9 +64,19 @@ class App extends Controller
         }
 
         if (is_single()) {
-            return (get_the_category() ?
+            if (function_exists('the_seo_framework')) {
+                $primary_cat = the_seo_framework()->get_primary_term_id( get_the_ID(), 'category' );
+            } else {
+                $primary_cat = null;
+            }
+
+            if (isset($primary_cat)) {
+                return '<a href="'. get_category_link($primary_cat) .'">'. get_term($primary_cat)->name .'</a>';
+            } else {
+                return (get_the_category() ?
                 '<a href="'. get_category_link(get_the_category()[0]) .'">'. get_the_category()[0]->name .'</a>'
             : '');
+            }
         }
     }
 
