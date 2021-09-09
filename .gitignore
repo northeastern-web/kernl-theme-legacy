@@ -7,6 +7,7 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 composer.lock
+yarn.lock
 vendor
 storage
 resources/assets/config-local.json
