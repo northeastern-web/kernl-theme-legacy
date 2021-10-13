@@ -1,0 +1,77 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Kernl Theme Legacy 9 Deployment
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the develop/sage-9 branch
+  push:
+    branches: [ develop/sage-9 ]
+  pull_request:
+    branches: [ develop/sage-9 ]
+  release:
+    branches: [ sage-9 ]
+    types: [ published ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - uses: php-actions/composer@v6
+        with:
+          dev: no
+          version: 1
+          php_version: 7.4
+          args: --no-ansi --no-interaction --no-progress --optimize-autoloader --no-scripts
+
+      - uses: actions/setup-node@v1.1.0
+        with:
+          version: 12.x
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build production dependencies
+        run: npm run build:production
+
+      - name: Deploy WordPress to WP Engine
+        # You may pin to the exact commit or the version.
+        # uses: wpengine/github-action-wpe-site-deploy@0643c03d539a4ec1e3b724f245796a2c323a553c
+        uses: wpengine/github-action-wpe-site-deploy@v2.3.1
+        with:
+          # The private RSA key you will save in the Github Secrets
+          WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
+          # optional php syntax check
+          PHP_LINT: # optional
+          # Optional flags for the deployment
+          FLAGS: # default is -azvr --inplace --exclude=".*"
+          # Optional WPE Clear cache
+          CACHE_CLEAR: true
+          # An optional source directory to deploy other than the root directory that is being versioned.
+          TPO_SRC_PATH: wp-content/themes/kernl-theme-legacy-9
+          # An optional destination directory to deploy to other than the WordPress root.
+          TPO_PATH: wp-content/themes/kernl-theme-legacy-9
+          # Source branch to deploy PRD_ENV
+          PRD_BRANCH: sage-9
+          # Destination to deploy to WPE Prod
+          PRD_ENV: nukernl
+          # Source branch to deploy STG_ENV
+          STG_BRANCH: # optional
+          # Destination to deploy to WPE Stage
+          STG_ENV: # optional
+          # Source branch to deploy DEV_ENV
+          DEV_BRANCH: develop/sage-9
+          # Destination to deploy to WPE Dev
+          DEV_ENV: nudevkernl
