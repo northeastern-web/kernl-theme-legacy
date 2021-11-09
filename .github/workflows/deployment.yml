@@ -1,0 +1,201 @@
+# This is a basic workflow to help you get started with Actions
+
+name: kernl(theme) WP Engine Deployment
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches:
+      - develop/sage-9
+      # - staging
+      # - sage-9
+  pull_request:
+    branches:
+      - develop/sage-9
+      # - staging
+      # - sage-9
+  release:
+    types: [published]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build-development:
+    # The type of runner that the job will run on
+    # if: ${{ github.ref_name == 'develop/sage-9' }} this is the correct one for final product
+    if: ${{ github.base_ref == 'develop/sage-9' }}
+    runs-on: ubuntu-latest
+    environment: nudevlearning
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Check out branch for environment
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ secrets.ENV_BRANCH_NAME }}
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - uses: php-actions/composer@v6
+        with:
+          dev: no
+          version: 1
+          php_version: 7.4
+          args: --no-ansi --no-interaction --no-progress --optimize-autoloader --no-scripts
+
+      - uses: actions/setup-node@v2.2.0
+        with:
+          version: 12.x
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Build production dependencies
+        run: npm run build:production
+
+      - name: List the directory contents
+        run: ls -la
+
+      - name: Get the current directory
+        run: pwd
+
+      - name: Add the key file to .ssh folder
+        run: /bin/bash -c "echo -e '${{ secrets.WPE_PRIVATE_KEY }}' >> ~/.ssh/id_rsa"
+
+      - name: Set proper permissions on the key
+        run: chmod 600 ~/.ssh/id_rsa
+
+      - name: Check the format of the key
+        run: head -1 ~/.ssh/id_rsa
+
+      - name: Touch the wp-engine server
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.ENV_SSH_LOGIN }} exit
+
+      - name: Deploy files to appropriate environment on WP-Engine
+        run: rsync -azvh ${{ secrets.ENV_PROJECT_CONTAINER_FOLDER }}* ${{ secrets.ENV_SSH_LOGIN }}:${{ secrets.ENV_FOLDER_PATH }}
+  # build-staging:
+  #     # The type of runner that the job will run on
+  #     if: ${{ github.ref_name == 'staging' }}
+  #     runs-on: ubuntu-latest
+  #     environment: staging
+
+  #     # Steps represent a sequence of tasks that will be executed as part of the job
+  #     steps:
+  #         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #         - name: Check out branch for environment
+  #           uses: actions/checkout@v2
+  #           with:
+  #               ref: ${{ secrets.ENV_BRANCH_NAME }}
+
+  #         - name: Cache Composer dependencies
+  #           uses: actions/cache@v2
+  #           with:
+  #               path: /tmp/composer-cache
+  #               key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+  #         - uses: php-actions/composer@v6
+  #           with:
+  #               dev: no
+  #               version: 1
+  #               php_version: 7.4
+  #               args: --no-ansi --no-interaction --no-progress --optimize-autoloader --no-scripts
+
+  #         - uses: actions/setup-node@v2.4.1
+  #           with:
+  #               version: 12.x
+
+  #         - name: Install dependencies
+  #           run: |
+  #               npm install
+
+  #         - name: Build production dependencies
+  #           run: npm run build:production
+
+  #         - name: List the directory contents
+  #           run: ls -la
+
+  #         - name: Get the current directory
+  #           run: pwd
+
+  #         - name: Add the key file to .ssh folder
+  #           run: /bin/bash -c "echo -e '${{ secrets.WPE_PRIVATE_KEY }}' >> ~/.ssh/id_rsa"
+
+  #         - name: Set proper permissions on the key
+  #           run: chmod 600 ~/.ssh/id_rsa
+
+  #         - name: Check the format of the key
+  #           run: head -1 ~/.ssh/id_rsa
+
+  #         - name: Touch the wp-engine server
+  #           run: ssh -o StrictHostKeyChecking=no ${{ secrets.ENV_SSH_LOGIN }} exit
+
+  #         - name: Deploy files to appropriate environment on WP-Engine
+  #           run: rsync -azvh ${{ secrets.ENV_PROJECT_CONTAINER_FOLDER }}* ${{ secrets.ENV_SSH_LOGIN }}:${{ secrets.ENV_FOLDER_PATH }}
+  # build-production:
+  #     # The type of runner that the job will run on
+  #     if: ${{ github.ref_name == 'main' }}
+  #     runs-on: ubuntu-latest
+  #     environment: production
+
+  #     # Steps represent a sequence of tasks that will be executed as part of the job
+  #     steps:
+  #         # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #         - name: Check out branch for environment
+  #           uses: actions/checkout@v2
+  #           with:
+  #               ref: ${{ secrets.ENV_BRANCH_NAME }}
+
+  #         - name: Cache Composer dependencies
+  #           uses: actions/cache@v2
+  #           with:
+  #               path: /tmp/composer-cache
+  #               key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+  #         - uses: php-actions/composer@v6
+  #           with:
+  #               dev: no
+  #               version: 1
+  #               php_version: 7.4
+  #               args: --no-ansi --no-interaction --no-progress --optimize-autoloader --no-scripts
+
+  #         - uses: actions/setup-node@v2.4.1
+  #           with:
+  #               version: 12.x
+
+  #         - name: Install dependencies
+  #           run: |
+  #               npm install
+
+  #         - name: Build production dependencies
+  #           run: npm run build:production
+
+  #         - name: List the directory contents
+  #           run: ls -la
+
+  #         - name: Get the current directory
+  #           run: pwd
+
+  #         - name: Add the key file to .ssh folder
+  #           run: /bin/bash -c "echo -e '${{ secrets.WPE_PRIVATE_KEY }}' >> ~/.ssh/id_rsa"
+
+  #         - name: Set proper permissions on the key
+  #           run: chmod 600 ~/.ssh/id_rsa
+
+  #         - name: Check the format of the key
+  #           run: head -1 ~/.ssh/id_rsa
+
+  #         - name: Touch the wp-engine server
+  #           run: ssh -o StrictHostKeyChecking=no ${{ secrets.ENV_SSH_LOGIN }} exit
+
+  #         - name: Deploy files to appropriate environment on WP-Engine
+  #           run: rsync -azvh ${{ secrets.ENV_PROJECT_CONTAINER_FOLDER }}* ${{ secrets.ENV_SSH_LOGIN }}:${{ secrets.ENV_FOLDER_PATH }}
