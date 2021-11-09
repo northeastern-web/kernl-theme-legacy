@@ -52,7 +52,7 @@ jobs:
           php_version: 7.4
           args: --no-ansi --no-interaction --no-progress --optimize-autoloader --no-scripts
 
-      - uses: actions/setup-node@v2.4.1
+      - uses: actions/setup-node@v2.2.0
         with:
           version: 12.x
 
